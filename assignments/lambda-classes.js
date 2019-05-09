@@ -74,8 +74,7 @@ const chris = new ProjectManager({
   name: "Chris",
   age: "28",
   location: "Wizardtown",
-  gradClassName: "WEB19",
-  favSubjects: ["responsive web design", "cat grooming"]
+  gradClassName: "WEB19"
 });
 
 const winnie = new Student({
@@ -132,3 +131,4 @@ console.table(mike);
 console.table(devin);
 console.table(winnie);
 console.table(sam);
+console.table(chris);
