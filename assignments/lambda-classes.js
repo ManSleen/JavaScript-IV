@@ -3,8 +3,8 @@
 class Person {
   constructor(attributes) {
     this.name = attributes.name;
-    this.age = attributes.name;
-    this.location = attributes.name;
+    this.age = attributes.age;
+    this.location = attributes.location;
   }
   speak() {
     return `Hello my name is ${this.name}, I am from ${this.location}`;
@@ -46,7 +46,7 @@ class Student extends Person {
     this.grade = studentAttributes.grade;
   }
   listsSubjects() {
-    return `${this.favSubjects.map(x => console.log("-", x))}`;
+    return `${this.favSubjects.forEach(x => console.log("-", x))}`;
   }
   PRAssignment(subject) {
     return `${this.name} has submitted a PR for ${subject}`;
@@ -90,8 +90,8 @@ const winnie = new Student({
 
 const mike = new Student({
   name: "Mike VanSleen",
-  location: "Denver",
   age: 29,
+  location: "Denver",
   previousBackground: "A lot of things",
   className: "web20",
   favSubjects: ["UI/UX", "Javascript", "Graphic Design"],
@@ -129,3 +129,5 @@ console.log(chris.assignGrade(winnie));
 console.log(winnie.grade);
 
 console.log(mike.listsSubjects());
+console.table(mike);
+console.log(mike.age);
