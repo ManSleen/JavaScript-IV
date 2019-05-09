@@ -46,7 +46,7 @@ class Student extends Person {
     this.grade = studentAttributes.grade;
   }
   listsSubjects() {
-    return `${favSubjects}`;
+    return `${this.favSubjects.map(x => console.log("-", x))}`;
   }
   PRAssignment(subject) {
     return `${this.name} has submitted a PR for ${subject}`;
@@ -127,3 +127,5 @@ console.log(mike.grade);
 
 console.log(chris.assignGrade(winnie));
 console.log(winnie.grade);
+
+console.log(mike.listsSubjects());
