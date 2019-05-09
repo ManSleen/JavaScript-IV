@@ -104,7 +104,7 @@ const devin = new Student({
   location: "Texas",
   previousBackground: "Slight HTML",
   className: "web20",
-  favSubjects: ["Music, Javascript, Chemisty"],
+  favSubjects: ["Music", "Javascript", "Chemisty"],
   grade: 92
 });
 
@@ -118,16 +118,17 @@ const sam = new Student({
   grade: 95
 });
 
+console.log("----------------------------------");
+
 console.log(chris.standUp("web20_reilly"));
 console.log(chris.name);
 
-console.log(mike.grade);
 console.log(chris.assignGrade(mike));
-console.log(mike.grade);
 
 console.log(chris.assignGrade(winnie));
-console.log(winnie.grade);
 
 console.log(mike.listsSubjects());
 console.table(mike);
-console.log(mike.age);
+console.table(devin);
+console.table(winnie);
+console.table(sam);
