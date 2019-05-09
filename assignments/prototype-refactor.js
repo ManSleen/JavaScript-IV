@@ -1,12 +1,3 @@
-/* 
-
-Prototype Refactor
-
-1. Copy and paste your code or the solution from yesterday
-
-2. Your goal is to refactor all of this code to use ES6 Classes. The console.log() statements should still return what is expected of them.
-
-*/
 class GameObject {
   constructor(attributes) {
     this.createdAt = attributes.createdAt;
@@ -17,23 +8,6 @@ class GameObject {
     return `${this.name} was removed from the game.`;
   }
 }
-
-// function GameObject(attributes) {
-//     this.createdAt = attributes.createdAt;
-//     this.name = attributes.name;
-//     this.dimensions = attributes.dimensions;
-//   }
-
-//   GameObject.prototype.destroy = function() {
-//     return `${this.name} was removed from the game.`;
-//   };
-
-/*
-    === CharacterStats ===
-    * healthPoints
-    * takeDamage() // prototype method -> returns the string '<object name> took damage.'
-    * should inherit destroy() from GameObject's prototype
-  */
 
 class CharacterStats extends GameObject {
   constructor(characterAttributes) {
@@ -50,30 +24,6 @@ class CharacterStats extends GameObject {
   }
 }
 
-//   function CharacterStats(characterAttributes) {
-//     GameObject.call(this, characterAttributes);
-//     this.healthPoints = characterAttributes.healthPoints;
-//   }
-
-//   CharacterStats.prototype = Object.create(GameObject.prototype);
-//   CharacterStats.prototype.takeDamage = function() {
-//     if (this.healthPoints > 0) {
-//       return `${this.name} took damage.`;
-//     } else {
-//       this.destroy;
-//       return `${this.name} is dead.`;
-//     }
-//   };
-
-/*
-    === Humanoid (Having an appearance or character resembling that of a human.) ===
-    * team
-    * weapons
-    * language
-    * greet() // prototype method -> returns the string '<object name> offers a greeting in <object language>.'
-    * should inherit destroy() from GameObject through CharacterStats
-    * should inherit takeDamage() from CharacterStats
-  */
 class Humanoid extends CharacterStats {
   constructor(humanoidAttributes) {
     super(humanoidAttributes);
@@ -86,25 +36,6 @@ class Humanoid extends CharacterStats {
   }
 }
 
-//   function Humanoid(humanoidAttributes) {
-//     CharacterStats.call(this, humanoidAttributes);
-//     this.team = humanoidAttributes.team;
-//     this.weapons = humanoidAttributes.weapons;
-//     this.language = humanoidAttributes.language;
-//   }
-
-//   Humanoid.prototype = Object.create(CharacterStats.prototype);
-
-//   Humanoid.prototype.greet = function() {
-//     return `${this.name} offers a greeting in ${this.language}.`;
-//   };
-
-/*
- * Inheritance chain: GameObject -> CharacterStats -> Humanoid
- * Instances of Humanoid should have all of the same properties as CharacterStats and GameObject.
- * Instances of CharacterStats should have all of the same properties as GameObject.
- */
-
 class Villain extends Humanoid {
   constructor(villainAttributes) {
     super(villainAttributes);
@@ -112,35 +43,17 @@ class Villain extends Humanoid {
   castSpell(otherPlayer) {
     otherPlayer.healthPoints -= 2;
     if (otherPlayer.healthPoints > 0) {
-      return `${this.name} attacked ${otherPlayer.name}! ${
+      return `${this.name} attacked ${otherPlayer.name}! \n${
         otherPlayer.name
-      }'s HP: ${otherPlayer.healthPoints}`;
+      }'s HP: ${otherPlayer.healthPoints} \n${this.name}'s HP: ${
+        this.healthPoints
+      }`;
     } else {
       console.log(otherPlayer.destroy());
       return `${this.name} KILLED ${otherPlayer.name}!`;
     }
   }
 }
-
-//   function Villain(villainAttributes) {
-//     Humanoid.call(this, villainAttributes);
-//   }
-
-//   Villain.prototype = Object.create(Humanoid.prototype);
-
-//   Villain.prototype.castSpell = function(otherPlayer) {
-//     otherPlayer.healthPoints -= 2;
-//     if (otherPlayer.healthPoints > 0) {
-//       return `${this.name} attacked ${otherPlayer.name}! Health: ${
-//         otherPlayer.healthPoints
-//       }`;
-//     } else {
-//       console.log(otherPlayer.destroy());
-//       return `${this.name} KILLED ${otherPlayer.name}! Health: ${
-//         otherPlayer.healthPoints
-//       }`;
-//     }
-//   };
 
 class Hero extends Humanoid {
   constructor(heroAttributes) {
@@ -149,21 +62,17 @@ class Hero extends Humanoid {
   slash(otherPlayer) {
     otherPlayer.healthPoints -= 2;
     if (otherPlayer.healthPoints > 0) {
-      return `${this.name} attacked ${otherPlayer.name}! ${
+      return `${this.name} attacked ${otherPlayer.name}! \n${
         otherPlayer.name
-      }'s HP: ${otherPlayer.healthPoints}`;
+      }'s HP: ${otherPlayer.healthPoints} \n${this.name}'s HP: ${
+        this.healthPoints
+      }`;
     } else {
       console.log(otherPlayer.destroy());
       return `${this.name} KILLED ${otherPlayer.name}!`;
     }
   }
 }
-
-//   function Hero(heroAttributes) {
-//     Humanoid.call(this, heroAttributes);
-//   }
-
-//   Hero.prototype = Object.create(Humanoid.prototype);
 
 // Test you work by un-commenting these 3 objects and the list of console logs below:
 
@@ -251,27 +160,21 @@ console.log(swordsman.destroy()); // Sir Mustachio was removed from the game.
 console.log("--------------------------");
 
 console.log(mephisto.castSpell(gargantuan));
+console.log("--------------------------");
 
-console.log(gargantuan.healthPoints);
-console.log(mephisto.healthPoints);
-
-console.log(mephisto.castSpell(gargantuan));
-
-console.log(gargantuan.healthPoints);
+console.log(gargantuan.slash(mephisto));
+console.log("--------------------------");
 
 console.log(mephisto.castSpell(gargantuan));
+console.log("--------------------------");
 
-console.log(gargantuan.healthPoints);
-
-console.log(mephisto.castSpell(gargantuan));
-
-console.log(gargantuan.healthPoints);
+console.log(gargantuan.slash(mephisto));
+console.log("--------------------------");
 
 console.log(mephisto.castSpell(gargantuan));
+console.log("--------------------------");
 
-console.log(gargantuan.healthPoints);
+console.log(mephisto.castSpell(gargantuan));
+console.log("--------------------------");
 
-// Stretch task:
-// * Create Villain and Hero constructor functions that inherit from the Humanoid constructor function.
-// * Give the Hero and Villains different methods that could be used to remove health points from objects which could result in destruction if health gets to 0 or drops below 0;
-// * Create two new objects, one a villain and one a hero and fight it out with methods!
+console.log(mephisto.castSpell(gargantuan));
