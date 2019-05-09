@@ -24,6 +24,17 @@ class Instructor extends Person {
   grade(student, subject) {
     return `${student.name} receives a perfect score on ${subject}`;
   }
+  assignGrade(student) {
+    student.grade += Math.floor(Math.random() * 100 - 50);
+
+    if (student.grade > 70) {
+      return `${this.name} has allowed ${student.name} to graduate! Yay!`;
+    } else {
+      return `${this.name} has given ${student.name} a grade of ${
+        student.grade
+      }`;
+    }
+  }
 }
 
 class Student extends Person {
@@ -74,7 +85,7 @@ const winnie = new Student({
   previousBackground: `MUA`,
   className: `web20`,
   favSubjects: ["CSS", "HTML", "LESS"],
-  grade: 80;
+  grade: 80
 });
 
 const mike = new Student({
@@ -109,3 +120,10 @@ const sam = new Student({
 
 console.log(chris.standUp("web20_reilly"));
 console.log(chris.name);
+
+console.log(mike.grade);
+console.log(chris.assignGrade(mike));
+console.log(mike.grade);
+
+console.log(chris.assignGrade(winnie));
+console.log(winnie.grade);
